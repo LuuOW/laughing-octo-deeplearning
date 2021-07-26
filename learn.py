@@ -16,3 +16,4 @@ std = np.std(ages)
 #variance of ages
 variance = np.var(ages)
 print (variance)
+
