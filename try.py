@@ -1,16 +1,12 @@
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
+import numpy as np
 
 df = pd.read_csv('https://sololearn.com/uploads/files/titanic.csv')
 df['male'] = df['Sex'] == 'male'
-X = df[['Pclass', 'male', 'Age', 'Siblings/Spouses', 'Parents/Children', 'Fare']].values
-y=[0, 0, 0, 1, 1] 
 
 
-model = LogisticRegression()
-model.fit(X, y)
+y_pred = [0, 0, 1, 1, 0]
+y = np.array([0,0,0,1,1])
 
-y_pred = model.predict(X)
-print((y == y_pred).sum())
 print((y == y_pred).sum() / y.shape[0])
-print(model.score(X, y))
