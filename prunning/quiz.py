@@ -1,22 +1,11 @@
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from scipy.stats import entropy
 
-S = [int(x) for x in input().split()]
-A = [int(x) for x in input().split()]
-B = [int(x) for x in input().split()]
 
-def gini(S, A, B):
-    left = 0
-    right = 0
-    for i in range(len(S)):
-        if S[i] in A:
-            left += 1
-        else:
-            right += 1
-    left = left / len(S)
-    right = right / len(S)
-    return round(1 - (left * left + right * right), 5)
-print (gini(S, A, B))
+targetValues = [int(x) for x in input().split()]
+leftSplit = [int(x) for x in input().split()]
+rightSplit = [int(x) for x in input().split()]
 
+leftGini = 1 - np.sum(leftSplit) / np.sum(targetValues)**2
+rightGini = 1 - np.sum(rightSplit) / np.sum(targetValues)**2
+infoGain = np.sum(targetValues) / np.sum(targetValues)**2 - leftGini - rightGini
+print(round(infoGain, 5))
