@@ -2,6 +2,7 @@ from sklearn.datasets import fetch_openml
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 import numpy as np
+import matplotlib.pyplot as plt
 
 X, y = fetch_openml('mnist_784', version=1, return_X_y=True)
 
@@ -19,3 +20,14 @@ mlp=MLPClassifier(
   solver='sgd', random_state=2)
 
 mlp.fit(X5, y5)
+
+print(mlp.coefs_)
+
+fig, axes = plt.subplots(2, 3, figsize=(5, 4))
+for i, ax in enumerate(axes.ravel()):
+    coef = mlp.coefs_[0][:, i]
+    ax.matshow(coef.reshape(28, 28), cmap=plt.cm.gray)
+    ax.set_xticks(())
+    ax.set_yticks(())
+    ax.set_title(i + 1)
+plt.show()
